@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi-Camera Event Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>📹 Multi-Camera Event Dashboard</h1>
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Camera</th>
+        <th>Timestamp</th>
+        <th>Rule</th>
+        <th>Object</th>
+        <th>Confidence</th>
+        <th>Snapshot</th>
+    </tr>
+
+    {% for e in events %}
+    <tr>
+        <td>{{ e.id }}</td>
+        <td>{{ e.camera_id }}</td>
+        <td>{{ e.timestamp }}</td>
+        <td class="rule-{{ e.rule }}">{{ e.rule }}</td>
+        <td>{{ e.object_type }}</td>
+        <td>{{ "%.2f"|format(e.confidence) }}</td>
+        <td>
+            {% if e.snapshot_path %}
+                <img src="/{{ e.snapshot_path }}" width="120">
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+
+
+
+
+

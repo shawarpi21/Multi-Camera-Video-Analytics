@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 20px; }
+h1 { text-align: center; color: #2c3e50; }
+table { width: 100%; border-collapse: collapse; background: white; }
+th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+th { background-color: #34495e; color: white; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+.rule-Intrusion { color: red; font-weight: bold; }
+.rule-Loitering { color: orange; font-weight: bold; }
+img { width: 120px; border-radius: 6px; }
+
+

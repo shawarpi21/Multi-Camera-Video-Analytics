@@ -1,0 +1,19 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Large data, videos, models
+data/
+videos/
+*.mp4
+*.avi
+*.pt
+*.onnx
