@@ -1,44 +1,300 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Multi-Camera Event Dashboard</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Multi-Camera Analysis</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);  /* Elegant dark gradient */
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header with gradient */
+    .header {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);  /* Popping gradient */
+      color: #fff;
+      padding: 12px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+
+    .header h1 i {
+      margin-right: 10px;
+      color: #00d4ff;  /* Popping blue */
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-menu span {
+      margin-right: 15px;
+      font-weight: 500;
+    }
+
+    /* Tabs */
+    .tabs {
+      background-color: #1e1e1e;
+      border-bottom: 1px solid #333;
+      margin-bottom: 30px;
+    }
+
+    .tabs .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tab-list {
+      display: flex;
+      list-style: none;
+    }
+
+    .tab-list li {
+      margin-right: 20px;
+    }
+
+    .tab-link {
+      display: block;
+      padding: 12px 20px;
+      color: #cccccc;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .tab-link.active,
+    .tab-link:hover {
+      color: #00d4ff;  /* Popping blue */
+      border-bottom-color: #00d4ff;
+      background-color: rgba(0, 212, 255, 0.1);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Card styles */
+    .card {
+      background: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);  /* Elegant gradient */
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00d4ff;  /* Popping blue */
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-header i {
+      margin-right: 10px;
+      color: #00d4ff;
+    }
+
+    /* Button styles */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #333 0%, #555 100%);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #555 0%, #777 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #00d4ff 0%, #0099cc 100%);  /* Popping blue */
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #0099cc 0%, #0077aa 100%);
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 10px;
+      }
+      .tab-list {
+        flex-direction: column;
+      }
+      .tab-list li {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<h1>📹 Multi-Camera Event Dashboard</h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1><i class="fas fa-video"></i> Multi-Camera Analysis</h1>
+      <div class="user-menu">
+        <span>Welcome, User</span>
+        <form method="post" action="/logout" style="display: inline;">
+          <button type="submit" class="btn">Sign out</button>
+        </form>
+      </div>
+    </div>
+  </header>
 
+  <!-- Tabs -->
+  <nav class="tabs">
+    <div class="container">
+      <ul class="tab-list">
+        <li><a href="#cameras" class="tab-link active" onclick="showTab('cameras')"><i class="fas fa-camera"></i> Cameras</a></li>
+        <li><a href="#detections" class="tab-link" onclick="showTab('detections')"><i class="fas fa-search"></i> Detections</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Camera</th>
-        <th>Timestamp</th>
-        <th>Rule</th>
-        <th>Object</th>
-        <th>Confidence</th>
-        <th>Snapshot</th>
-    </tr>
+  <div class="container">
+    <!-- Cameras Tab Content -->
+    <div id="cameras-tab" class="tab-content">
+      <h2 class="card-header"><i class="fas fa-camera"></i> Camera Feeds</h2>
+      <div class="grid">
+        {% for camera in cameras %}
+        <div class="card">
+          <h3><i class="fas fa-video"></i> Camera {{ camera.id }}</h3>
+          <img src="/snapshots/camera_{{ camera.id }}_latest.jpg" alt="Camera Feed" style="width: 100%; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          <p><strong>Status:</strong> <span style="color: #00ff88;">{{ camera.status }}</span></p>  <!-- Popping green -->
+          <p><strong>Last Detection:</strong> {{ camera.last_detection }}</p>
+          <button class="btn btn-primary" onclick="startCamera('{{ camera.id }}')"><i class="fas fa-play"></i> Start</button>
+          <button class="btn" onclick="stopCamera('{{ camera.id }}')"><i class="fas fa-stop"></i> Stop</button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
 
-    {% for e in events %}
-    <tr>
-        <td>{{ e.id }}</td>
-        <td>{{ e.camera_id }}</td>
-        <td>{{ e.timestamp }}</td>
-        <td class="rule-{{ e.rule }}">{{ e.rule }}</td>
-        <td>{{ e.object_type }}</td>
-        <td>{{ "%.2f"|format(e.confidence) }}</td>
-        <td>
-            {% if e.snapshot_path %}
-                <img src="/{{ e.snapshot_path }}" width="120">
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <!-- Detections Tab Content -->
+    <div id="detections-tab" class="tab-content" style="display: none;">
+      <div class="card">
+        <h3 class="card-header"><i class="fas fa-list"></i> Recent Detections</h3>
+        <ul style="list-style: none; padding: 0;">
+          {% for detection in detections %}
+          <li style="padding: 10px 0; border-bottom: 1px solid #444;"><i class="fas fa-clock" style="color: #00d4ff;"></i> {{ detection.timestamp }}: <strong>{{ detection.label }}</strong> ({{ "%.2f"|format(detection.confidence) }})</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+      document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+      document.getElementById(tabName + '-tab').style.display = 'block';
+      event.target.classList.add('active');
+    }
+
+    // API calls with exception handling
+    async function startCamera(id) {
+      try {
+        const response = await fetch(`/api/cameras/${id}/start`, { method: 'POST' });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        alert(`Camera ${id} started successfully!`);
+        console.log('Start response:', data);
+      } catch (error) {
+        console.error('Error starting camera:', error);
+        alert(`Failed to start camera ${id}: ${error.message}`);
+      }
+    }
+
+    async function stopCamera(id) {
+      try {
+        const response = await fetch(`/api/cameras/${id}/stop`, { method: 'POST' });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        alert(`Camera ${id} stopped successfully!`);
+        console.log('Stop response:', data);
+      } catch (error) {
+        console.error('Error stopping camera:', error);
+        alert(`Failed to stop camera ${id}: ${error.message}`);
+      }
+    }
+
+    // Auto-refresh detections every 30 seconds
+    setInterval(async () => {
+      try {
+        const response = await fetch('/api/detections?limit=5');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const detections = await response.json();
+        const list = document.querySelector('#detections-tab ul');
+        list.innerHTML = detections.map(d => `<li style="padding: 10px 0; border-bottom: 1px solid #444;"><i class="fas fa-clock" style="color: #00d4ff;"></i> ${d.timestamp}: <strong>${d.label}</strong> (${d.confidence.toFixed(2)})</li>`).join('');
+      } catch (error) {
+        console.error('Error refreshing detections:', error);
+      }
+    }, 30000);
+  </script>
 </body>
 </html>
-
-
-
-
-
