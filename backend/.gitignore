@@ -1,6 +1,13 @@
+# Virtual environment
 venv/
 __pycache__/
 *.pyc
+*.db
+users.db
 events.db
-snapshots/
+.env
+config.json  # If you have sensitive config
+.DS_Store
+Thumbs.db
+*.log
 
