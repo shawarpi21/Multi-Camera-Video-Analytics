@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import sqlite3
 
 # Connect to the database (replace 'example.db' with your actual DB file if needed)

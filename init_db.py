@@ -1,7 +1,3 @@
-
-
-
-
 import sqlite3
 
 conn = sqlite3.connect('users.db')  # This creates or connects to 'users.db' (adjust if your app uses a different filename)

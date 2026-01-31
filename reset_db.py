@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 import sqlite3
 
 # Replace 'users.db' with the exact file from backend/database.py
