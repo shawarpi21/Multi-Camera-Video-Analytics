@@ -1,4 +1,4 @@
-# 🎥 Multi-Camera Video Analytics System
+#  Multi-Camera Video Analytics System
 
 A real-time video analytics platform that processes multiple camera streams and performs object detection using modern computer vision models.
 
