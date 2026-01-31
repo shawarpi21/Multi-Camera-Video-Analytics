@@ -1,79 +1,175 @@
 # Multi-Camera-Video-Analytics
-This project is a web-based system that analyzes video feeds from multiple cameras using advanced AI to detect objects like people, phones, and more.
-Purpose: It's like having a smart security assistant that watches your cameras and alerts you to important events.
-Use Cases: Perfect for home security, retail monitoring, or any setup needing automated video analysis.
-Key Focus: Built for simplicity and scalability.
-🚀 Tech Stack
-Backend:
-Python: Core language for logic and scripting.
-FastAPI: For building a fast, modern web API.
-Uvicorn: To run the web server efficiently.
-Ultralytics YOLO: AI model for real-time object detection.
-OpenCV: For video processing and frame handling.
-SQLite: Lightweight database for storing user data and events.
-Jinja2: For rendering dynamic web pages.
-Passlib: For secure password hashing.
-Frontend:
-HTML, CSS, and JavaScript: Basic web technologies for a clean, responsive interface.
-Font Awesome: For icons to enhance the UI.
-Other Tools:
-Virtual environment (venv): For isolated Python dependencies.
-YOLOv8 models: Pre-trained AI for detection (e.g., yolov8n.pt).
-Standard Python libraries: For file handling, threading, and logging.
-Why This Stack?:
-Open-source and easy to deploy.
-Focuses on real-time performance.
-No heavy frameworks—just reliable tools that work together.
-✨ Features
-Multi-Camera Support:
-Connect and monitor multiple cameras (e.g., webcams or IP cameras) simultaneously.
-AI-Powered Detection:
-Uses YOLO AI to spot objects like people, cell phones, laptops, helmets, and more in real-time.
-Web Dashboard:
-A simple, GitHub-inspired interface to view feeds, start/stop cameras, and see detection logs.
-Secure Login:
-Password-protected access with hashed passwords for safety.
-Event Logging:
-Automatically saves detections to a database for review.
-Snapshots:
-Captures images of detected events for easy access.
-Real-Time Alerts:
-Basic notifications for detections (expandable for emails or SMS).
-Scalable:
-Easy to add more cameras or customize detection classes.
-🛠 Installation
-Prerequisites:
-Python 3.8+ installed.
-Step 1: Clone the Repository:
+A modular system for real-time object detection across multiple video streams using modern computer vision models.
+
+The application processes live camera feeds, detects predefined objects on each frame, and exposes results through a web-based dashboard. The system is designed to prioritize low latency, simplicity, and extensibility.
+
+Problem Statement-
+
+Traditional video surveillance requires continuous manual monitoring, which does not scale with the number of camera feeds and often leads to missed events. Existing solutions are either expensive, closed-source, or difficult to customize.
+
+Solution Overview-
+
+This project provides an automated video analytics pipeline that:
+
+Captures frames from multiple camera sources
+
+Runs real-time object detection on each stream
+
+Logs detection events for later inspection
+
+Exposes live feeds and historical data through a simple web interface
+
+The system reduces manual effort while remaining lightweight and easy to extend.
+
+Key Features
+Multi-Camera Stream Handling
+
+Supports multiple simultaneous camera inputs
+
+Works with local webcams and IP camera streams
+
+Each camera is processed independently to avoid blocking
+
+Real-Time Object Detection
+
+Uses YOLOv8 for fast and accurate detection
+
+Detects people, mobile phones, laptops, helmets, and other configurable classes
+
+Model can be replaced or fine-tuned without changing the rest of the system
+
+Web-Based Dashboard-
+
+Displays live camera feeds in the browser
+
+Allows starting and stopping individual camera streams
+
+Shows detection logs with timestamps and object labels
+
+Authentication and Security
+
+Dashboard access is protected by user authentication
+
+Passwords are stored using secure hashing
+
+Prevents unauthorized access to camera feeds and logs
+
+Event Logging and Persistence
+
+Detection events are automatically stored in a database
+
+Each record includes detected object type, time, and source camera
+
+Enables post-analysis and audit of historical activity
+
+Snapshot Capture-
+
+Saves image snapshots when detections occur
+
+Allows quick visual verification of logged events
+
+Useful for reporting or later review
+
+Extensibility-
+
+New camera sources can be added through configuration
+
+Detection classes can be modified with minimal code changes
+
+Designed to support future alerting and analytics features
+
+System Architecture
+
+Video streams are captured using OpenCV
+
+Frames are passed to a YOLO-based detection pipeline
+
+Detection results are processed and persisted in SQLite
+
+FastAPI handles backend routing and request handling
+
+Jinja2 renders server-side HTML views
+
+The architecture is intentionally simple to keep runtime overhead low and debugging straightforward.
+
+Technology Stack-
+Backend
+
+Python – Core language for application logic
+
+FastAPI – Backend framework for APIs and server-side rendering
+
+Uvicorn – ASGI server for running the application
+
+Ultralytics YOLOv8 – Real-time object detection model
+
+OpenCV – Video capture and frame manipulation
+
+SQLite – Lightweight storage for users and events
+
+Passlib – Secure password hashing
+
+Jinja2 – Template engine for HTML views
+
+Frontend-
+
+HTML, CSS, JavaScript – Lightweight user interface
+
+Minimal client-side logic to reduce complexity
+
+Tooling-
+
+Python virtual environment for dependency isolation
+
+Pre-trained YOLO models (e.g. yolov8n.pt)
+
+Setup and Installation
+Requirements
+
+Python 3.8 or higher
+
+Installation Steps
 git clone https://github.com/yourusername/multi-camera-video-analysis.git
 cd multi-camera-video-analysis
-Step 2: Set Up a Virtual Environment:
 python -m venv venv
-venv\Scripts\activate # On Windows; use source venv/bin/activate on Mac/Linux
-Step 3: Install Dependencies:
+venv\Scripts\activate
 pip install -r requirements.txt
-Step 4: Prepare the Database:
-The app creates databases automatically.
-Add a test user if needed (run in Python shell):
-from passlib.hash import bcrypt
-hashed_pw = bcrypt.hash("yourpassword")
-import sqlite3
-conn = sqlite3.connect("users.db")
-cur = conn.cursor()
-cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("testuser", hashed_pw))
-conn.commit()
-conn.close()
-Step 5: Download YOLO Model (if not included):
-Ensure yolov8n.pt is in the root folder (download from Ultralytics if missing).
-🎯 Usage
-Step 1: Start the App:
+
+
+Ensure the YOLO model file (yolov8n.pt) is present in the project root.
+
+Running the Application
 python main.py
-Open http://127.0.0.1:8000 in your browser.
-Step 2: Log In:
-Use the test user (or create your own) to access the dashboard.
-Step 3: Monitor Cameras:
-View camera feeds, start/stop them, and check detection logs.
-Detections are saved and displayed in real-time.
-Step 4: Customize:
-Edit backend/config.py to add more cameras.
-Modify backend/yolo_detector.py to detect different objects.
+
+
+The application will be available at:
+
+http://127.0.0.1:8000
+
+Configuration-
+
+Camera sources can be configured in backend/config.py
+
+Detection logic and classes can be updated in backend/yolo_detector.py
+
+Database files are created automatically at runtime
+
+Use Cases-
+
+Small to medium-scale security monitoring
+
+Retail and workplace surveillance
+
+Academic projects and computer vision experiments
+
+Prototyping real-time AI systems
+
+Future Work -
+
+Asynchronous processing for higher throughput
+
+Alerting mechanisms (email or messaging services)
+
+Role-based access control
+
+Support for additional detection models
