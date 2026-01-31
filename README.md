@@ -1,175 +1,71 @@
 # Multi-Camera-Video-Analytics
-A modular system for real-time object detection across multiple video streams using modern computer vision models.
+A real-time video analytics system that processes multiple camera streams and performs object detection using modern computer vision models.
 
-The application processes live camera feeds, detects predefined objects on each frame, and exposes results through a web-based dashboard. The system is designed to prioritize low latency, simplicity, and extensibility.
+The project focuses on building a practical surveillance pipeline that is easy to deploy, easy to extend, and efficient enough for continuous monitoring. It is designed as a clean, end-to-end system rather than a standalone model demo.
 
-Problem Statement-
+🧠 Problem -
 
-Traditional video surveillance requires continuous manual monitoring, which does not scale with the number of camera feeds and often leads to missed events. Existing solutions are either expensive, closed-source, or difficult to customize.
+Video surveillance systems often require constant human monitoring, which does not scale as the number of cameras increases. Important events can be missed, and many existing solutions are either proprietary, expensive, or difficult to adapt to specific requirements.
 
-Solution Overview-
+🛠 Solution -
 
-This project provides an automated video analytics pipeline that:
+This project automates video monitoring by combining real-time object detection with a lightweight web application.
 
-Captures frames from multiple camera sources
+The system:
 
-Runs real-time object detection on each stream
+Connects to multiple video sources such as webcams or IP cameras
 
-Logs detection events for later inspection
+Processes frames in real time using a YOLO-based detection pipeline
 
-Exposes live feeds and historical data through a simple web interface
+Identifies predefined objects and captures evidence at detection time
 
-The system reduces manual effort while remaining lightweight and easy to extend.
+Stores structured event data for later review
 
-Key Features
-Multi-Camera Stream Handling
+Provides a web interface for live monitoring and historical inspection
 
-Supports multiple simultaneous camera inputs
+⭐ Key Features -
 
-Works with local webcams and IP camera streams
+Multi-camera support that allows simultaneous monitoring of several video streams
 
-Each camera is processed independently to avoid blocking
+Real-time object detection using YOLOv8 with configurable detection classes
 
-Real-Time Object Detection
+Web dashboard for viewing live feeds, managing cameras, and reviewing logs
 
-Uses YOLOv8 for fast and accurate detection
+Authentication and access control to protect camera feeds and data
 
-Detects people, mobile phones, laptops, helmets, and other configurable classes
+Event logging with snapshots to enable post-event analysis
 
-Model can be replaced or fine-tuned without changing the rest of the system
+Configuration-driven design that makes the system easy to extend and maintain
 
-Web-Based Dashboard-
+🧩 Architecture -
 
-Displays live camera feeds in the browser
+Video streams are captured using OpenCV and processed frame by frame through a YOLO-based inference pipeline. Detection results are persisted in a lightweight SQLite database. The backend is implemented using FastAPI, which serves both API endpoints and server-rendered views through Jinja2.
 
-Allows starting and stopping individual camera streams
+The architecture is intentionally simple to minimize latency and keep the system easy to understand, debug, and extend.
 
-Shows detection logs with timestamps and object labels
+⚙️ Tech Stack -
 
-Authentication and Security
+Backend: Python, FastAPI, Uvicorn, YOLOv8, OpenCV, SQLite
+Frontend: HTML, CSS, JavaScript
+Security & Templating: Passlib, Jinja2
 
-Dashboard access is protected by user authentication
-
-Passwords are stored using secure hashing
-
-Prevents unauthorized access to camera feeds and logs
-
-Event Logging and Persistence
-
-Detection events are automatically stored in a database
-
-Each record includes detected object type, time, and source camera
-
-Enables post-analysis and audit of historical activity
-
-Snapshot Capture-
-
-Saves image snapshots when detections occur
-
-Allows quick visual verification of logged events
-
-Useful for reporting or later review
-
-Extensibility-
-
-New camera sources can be added through configuration
-
-Detection classes can be modified with minimal code changes
-
-Designed to support future alerting and analytics features
-
-System Architecture
-
-Video streams are captured using OpenCV
-
-Frames are passed to a YOLO-based detection pipeline
-
-Detection results are processed and persisted in SQLite
-
-FastAPI handles backend routing and request handling
-
-Jinja2 renders server-side HTML views
-
-The architecture is intentionally simple to keep runtime overhead low and debugging straightforward.
-
-Technology Stack-
-Backend
-
-Python – Core language for application logic
-
-FastAPI – Backend framework for APIs and server-side rendering
-
-Uvicorn – ASGI server for running the application
-
-Ultralytics YOLOv8 – Real-time object detection model
-
-OpenCV – Video capture and frame manipulation
-
-SQLite – Lightweight storage for users and events
-
-Passlib – Secure password hashing
-
-Jinja2 – Template engine for HTML views
-
-Frontend-
-
-HTML, CSS, JavaScript – Lightweight user interface
-
-Minimal client-side logic to reduce complexity
-
-Tooling-
-
-Python virtual environment for dependency isolation
-
-Pre-trained YOLO models (e.g. yolov8n.pt)
-
-Setup and Installation
-Requirements
-
-Python 3.8 or higher
-
-Installation Steps
+🚀 Quick Start -
 git clone https://github.com/yourusername/multi-camera-video-analysis.git
 cd multi-camera-video-analysis
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-
-
-Ensure the YOLO model file (yolov8n.pt) is present in the project root.
-
-Running the Application
 python main.py
 
 
-The application will be available at:
+Open http://127.0.0.1:8000 in your browser.
 
-http://127.0.0.1:8000
+🔧 Configuration -
 
-Configuration-
+Camera sources can be updated in backend/config.py
 
-Camera sources can be configured in backend/config.py
+Detection logic and classes can be modified in backend/yolo_detector.py
 
-Detection logic and classes can be updated in backend/yolo_detector.py
+🎯 Use Cases -
 
-Database files are created automatically at runtime
-
-Use Cases-
-
-Small to medium-scale security monitoring
-
-Retail and workplace surveillance
-
-Academic projects and computer vision experiments
-
-Prototyping real-time AI systems
-
-Future Work -
-
-Asynchronous processing for higher throughput
-
-Alerting mechanisms (email or messaging services)
-
-Role-based access control
-
-Support for additional detection models
+This system is suitable for home or small-scale security setups, retail and office monitoring, academic computer vision projects, and prototyping real-time AI pipelines.
