@@ -92,4 +92,4 @@ python main.py
 
 ## 📊 Snapshot
 
-![Alt text describing the image](Screenshot 2026-02-03 125334.png)
+![Sign- in snapshot](Screenshot 2026-02-03 125334.png)
