@@ -92,4 +92,4 @@ python main.py
 
 ## 📊 Snapshot
 
-![](path/to/your/image.png)
+![Alt text describing the image](Screenshot 2026-02-03 125334.png)
