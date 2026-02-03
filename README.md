@@ -92,7 +92,7 @@ python main.py
 
 ## 📊 Snapshot
 
-![Image Alt](https://github.com/user-attachments/assets/caec411c-35e2-445f-9074-f3ea63dad15d)
+![Image Alt](https://github.com/shawarpi21/Multi-Camera-Video-Analytics/blob/99ab8ebc18cd53c51dd47814c7f7711f4fa29705/signin-page.png?raw=true)
 
 
 
