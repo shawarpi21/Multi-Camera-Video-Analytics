@@ -92,4 +92,11 @@ python main.py
 
 ## 📊 Snapshot
 
-![Sign- in snapshot](Screenshot 2026-02-03 125334.png)
+<img width="1882" height="866" alt="signup-page" src="https://github.com/user-attachments/assets/e82763d8-76d9-4952-91ff-6cb237b361b9" />
+<img width="1882" height="869" alt="signin-page" src="https://github.com/user-attachments/assets/c0b0aa39-fe8b-494d-8793-3eb737ab5134" />
+<img width="1896" height="857" alt="dashboard-page" src="https://github.com/user-attachments/assets/ed5f343e-dbaf-4a6f-a869-c98f5aef3f53" />
+
+
+
+
+
