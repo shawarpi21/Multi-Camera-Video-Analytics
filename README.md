@@ -92,7 +92,7 @@ python main.py
 
 ## 📊 Snapshot
 
-![Image Alt](<img width="1882" height="869" alt="image" src="https://github.com/user-attachments/assets/caec411c-35e2-445f-9074-f3ea63dad15d" />)
+![Image Alt](https://github.com/user-attachments/assets/caec411c-35e2-445f-9074-f3ea63dad15d)
 
 
 
