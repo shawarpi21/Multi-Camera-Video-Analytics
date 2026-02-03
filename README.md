@@ -92,9 +92,7 @@ python main.py
 
 ## 📊 Snapshot
 
-![Signin Page](<img width="1882" height="869" alt="image" src="https://github.com/user-attachments/assets/8d30633f-210b-4e28-a59f-c68263eb7169" />
-)
-
+![Signin Page](https://raw.githubusercontent.com/shawarpi21/Multi-Camera-Video-Analytics/99ab8ebc18cd53c51dd47814c7f7711f4fa29705/signin-page.png)
 
 
 
